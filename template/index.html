@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe HAVEN😋</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <style>
+        body {
+            background-color: whitesmoke;
+        }
+        
+        .first {
+            width: 100%;
+            height: 700px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .second {
+            width: 100%;
+            height: 700px;
+            background-image: url(/img/7.jpg);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .third {
+            width: 100%;
+            height: 700px;
+            background-image: url(/img/1.jpg);
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border-radius: 20px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .fourth {
+            width: 100%;
+            height: 1500px;
+            background-image: url(/img/5.jpg);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            padding-top: 50px;
+            border-radius: 20px;
+        }
+        
+        .background-video-container {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 700px;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        
+        #background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Adjust the opacity as needed */
+        }
+        
+        .card-content {
+            align-items: center;
+            justify-content: center;
+            margin-top: 410px;
+        }
+        
+        .card {
+            margin: 20px;
+            padding: 20px;
+            width: 1350px;
+            min-height: 200px;
+            display: grid;
+            grid-template-rows: 20px 50px 1fr 50px;
+            border-radius: 10px;
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+            transition: all 0.2s;
+        }
+        
+        .card:hover {
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
+            transform: scale(1.01);
+        }
+        
+        .card__link,
+        .card__exit,
+        .card__icon {
+            position: relative;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font: 1.5em sans-serif;
+            margin-left: 5px;
+        }
+        
+        .card__link::after {
+            position: absolute;
+            top: 25px;
+            left: 0;
+            content: "";
+            width: 0%;
+            height: 3px;
+            background-color: rgba(255, 255, 255, 0.6);
+            transition: all 0.5s;
+        }
+        
+        .card__link:hover::after {
+            width: 100%;
+        }
+        
+        .text {
+            color: white;
+            margin-left: 15px;
+            font: 1.2em sans-serif;
+            font-style: italic;
+        }
+        
+        .card__exit {
+            grid-row: 1/2;
+            justify-self: end;
+        }
+        
+        .card__icon {
+            grid-row: 2/3;
+            font-size: 30px;
+        }
+        
+        .card__title {
+            grid-row: 3/4;
+            font-weight: 400;
+            color: #ffffff;
+        }
+        
+        .card__apply {
+            grid-row: 4/5;
+            align-self: center;
+        }
+        
+        .card-5 {
+            background: transparent;
+        }
+        
+        @media (max-width: 1600px) {
+            .cards {
+                justify-content: center;
+            }
+        }
+        
+        .w {
+            color: #ffffff;
+            position: absolute;
+            padding: 20px;
+            margin-top: 320px;
+            margin-left: 25px;
+            font: 1.8em sans-serif;
+            color: #DDC6B6;
+        }
+        
+        button {
+            --color: #DDC6B6;
+            font-family: inherit;
+            display: inline-block;
+            width: 10em;
+            height: 2.6em;
+            line-height: 2.5em;
+            margin: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--color);
+            transition: color .5s;
+            z-index: 1;
+            font-size: 17px;
+            border-radius: 6px;
+            font-weight: 500;
+            color: var(--color);
+        }
+        
+        button:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            background: var(--color);
+            height: 150px;
+            width: 200px;
+            border-radius: 50%;
+        }
+        
+        button:hover {
+            color: #fff;
+        }
+        
+        button:before {
+            top: 100%;
+            left: 100%;
+            transition: all .7s;
+        }
+        
+        button:hover:before {
+            top: -30px;
+            left: -30px;
+        }
+        
+        button:active:before {
+            background: #DDC6B6;
+            transition: background 0s;
+        }
+        
+        .txt {
+            font-style: italic;
+            color: #DDC6B6;
+        }
+        
+        .img-container {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 700px;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        
+        #img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        #cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            font-size: 1.2em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .card2 {
+            justify-content: center;
+            position: relative;
+            z-index: 0;
+            display: flex;
+            align-items: center;
+            width: 1000px;
+            height: 800px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            padding: 100px;
+            overflow: hidden;
+            border-radius: 10px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+        
+        .content2 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            color: #e8e8e8;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+        
+        .content2 .heading2 {
+            font-weight: 700;
+            font-size: 32px;
+        }
+        
+        .content2 .para2 {
+            line-height: 1.5;
+        }
+        
+        .content2 .btn2 {
+            color: #e8e8e8;
+            text-decoration: none;
+            padding: 10px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100%);
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card2::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(-45deg, #f89b29 0%, #DDC6B6 100%);
+            z-index: -1;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+        
+        .card2:hover::before {
+            height: 100%;
+        }
+        
+        .card2:hover {
+            box-shadow: none;
+        }
+        
+        .card2:hover .btn {
+            color: #212121;
+            background: #e8e8e8;
+        }
+        
+        .content2 .btn:hover {
+            outline: 2px solid #e8e8e8;
+            background: transparent;
+            color: #e8e8e8;
+        }
+        
+        .content2 .btn:active {
+            box-shadow: none;
+        }
+        
+        .enter-dish {
+            position: relative;
+            height: 140px;
+            width: 240px;
+            padding: 20px;
+            background-color: #FFF;
+            border-radius: 4px;
+            color: #333;
+            box-shadow: 0px 0px 60px 5px rgba(0, 0, 0, 0.4);
+            border-style: solid;
+            border-color: #DDC6B6;
+        }
+        
+        .enter-dish:after {
+            position: absolute;
+            content: "";
+            right: -10px;
+            bottom: 18px;
+            width: 0;
+            height: 0;
+            border-left: 0px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid #DDC6B6;
+        }
+        
+        .enter-dish p {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            line-height: 28px;
+        }
+        
+        .enter-dish input {
+            position: absolute;
+            bottom: 30px;
+            border: none;
+            border-bottom: 1px solid #d4d4d4;
+            padding: 10px;
+            width: 82%;
+            background: transparent;
+            transition: all .25s ease;
+        }
+        
+        .enter-dish input:focus {
+            outline: none;
+            border-bottom: 1px solid #DDC6B6;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', 'sans-serif';
+        }
+        
+        .enter-dish .submit-btn {
+            position: absolute;
+            border-radius: 30px;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            background-color: #DDC6B6;
+            color: #FFF;
+            padding: 12px 25px;
+            display: inline-block;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            right: -10px;
+            bottom: -20px;
+            cursor: pointer;
+            transition: all .25s ease;
+            box-shadow: -5px 6px 20px 0px rgba(26, 26, 26, 0.4);
+        }
+        
+        .enter-dish .submit-btn:hover {
+            background-color: #DDC6A9;
+            box-shadow: -5px 6px 20px 0px rgba(88, 88, 88, 0.569);
+        }
+        
+        .cookie-card {
+            max-width: 100%;
+            padding: 1rem;
+            background-color: #ceced0;
+            border-radius: 10px;
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, .05);
+        }
+        
+        .title {
+            font-weight: 600;
+            color: rgb(31 41 55);
+        }
+        
+        .description {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            color: rgb(75 85 99);
+        }
+        
+        .description a {
+            --tw-text-opacity: 1;
+            color: rgb(59 130 246);
+        }
+        
+        .description a:hover {
+            -webkit-text-decoration-line: underline;
+            text-decoration-line: underline;
+        }
+        
+        .actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1rem;
+            -moz-column-gap: 1rem;
+            column-gap: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .accept {
+            font-size: 0.8em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1rem;
+            background-color: #ceced0;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            color: black;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-top: 0.625rem;
+            padding-bottom: 0.625rem;
+            border: none;
+            transition: all .15s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .accept:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+        
+        input[type="radio"] {
+            /* Hide the default radio button */
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            outline: none;
+            /* Set a custom size for the radio button */
+            width: 20px;
+            height: 20px;
+            /* Add a custom background and border */
+            background-color: #ffffff;
+            border: 5px solid #999999;
+            /* Add a custom border-radius to create a circular shape */
+            border-radius: 50%;
+            /* Center the radio button within its container */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            /* Add a margin to separate radio buttons */
+            margin-right: 8px;
+        }
+        
+        input[type="radio"]:checked {
+            /* Change the background color or add any desired style */
+            background-color: #DDC6B6;
+        }
+        
+        .spinneranimation {
+            margin-top: 175px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .spinner {
+            width: 70.4px;
+            height: 70.4px;
+            --clr: rgb(247, 197, 159);
+            --clr-alpha: rgb(247, 197, 159, .1);
+            animation: spinner 1.6s infinite ease;
+            transform-style: preserve-3d;
+        }
+        
+        .spinner>div {
+            background-color: var(--clr-alpha);
+            height: 100%;
+            position: absolute;
+            width: 100%;
+            border: 3.5px solid var(--clr);
+        }
+        
+        .spinner div:nth-of-type(1) {
+            transform: translateZ(-35.2px) rotateY(180deg);
+        }
+        
+        .spinner div:nth-of-type(2) {
+            transform: rotateY(-270deg) translateX(50%);
+            transform-origin: top right;
+        }
+        
+        .spinner div:nth-of-type(3) {
+            transform: rotateY(270deg) translateX(-50%);
+            transform-origin: center left;
+        }
+        
+        .spinner div:nth-of-type(4) {
+            transform: rotateX(90deg) translateY(-50%);
+            transform-origin: top center;
+        }
+        
+        .spinner div:nth-of-type(5) {
+            transform: rotateX(-90deg) translateY(50%);
+            transform-origin: bottom center;
+        }
+        
+        .spinner div:nth-of-type(6) {
+            transform: translateZ(35.2px);
+        }
+        
+        @keyframes spinner {
+            0% {
+                transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+            }
+            50% {
+                transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+            }
+            100% {
+                transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+            }
+        }
+        
+        .loading-message {
+            font-size: 1em;
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: italic;
+            color: #DDC6B6;
+        }
+        
+        .loading-container {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .loading-container.show {
+            opacity: 1;
+        }
+        
+        @media (max-width: 767px) {
+            .first,
+            .second,
+            .third,
+            .fourth,
+            .background-video-container,
+            .img-container,
+            .card2 {
+                height: auto;
+            }
+            .card {
+                width: 100%;
+                max-width: 400px;
+            }
+            .card2 {
+                width: 100%;
+                max-width: 400px;
+            }
+            .card-content {
+                margin-top: 20px;
+            }
+            .w {
+                margin-top: 20px;
+                margin-left: 0;
+                text-align: center;
+            }
+            button {
+                width: 100%;
+            }
+            #cards {
+                justify-content: center;
+            }
+            .enter-dish {
+                height: auto;
+                padding: 10px;
+            }
+            .enter-dish p {
+                font-size: 16px;
+                line-height: 24px;
+            }
+            .enter-dish input {
+                bottom: 20px;
+                width: 70%;
+            }
+            .enter-dish .submit-btn {
+                right: 0;
+                bottom: -10px;
+                font-size: 10px;
+                padding: 8px 15px;
+            }
+            .cookie-card {
+                max-width: 100%;
+                padding: 0.5rem;
+            }
+            .title {
+                font-size: 18px;
+            }
+            .description {
+                font-size: 0.75rem;
+                line-height: 1rem;
+            }
+            .actions {
+                -moz-column-count: 2;
+                column-count: 2;
+            }
+            .accept {
+                font-size: 0.7em;
+                padding: 0.4rem 0.75rem;
+            }
+        }
+    </style>
+    <div class="first">
+        <div class="background-video-container">
+            <video id="background-video" autoplay loop muted>
+                <source src="/vid/" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+            <div class="w">
+                <h1>Welcome to RECIPE HAVEN😋</h1>
+            </div>
+            <div class="card-content">
+                <div class="card card-5">
+                    <div class="card__icon">🍴🍜🍚🍕🍟🍔</div>
+                    <p class="card__exit">※</p>
+                    <div class="text">Step right into our kitchen, where culinary magic happens (and sometimes a little chaos too)! Brace yourself for mouthwatering recipes that will make your taste buds do a happy dance. We're not just another run-of-the-mill recipe website
+                        - oh no! We've got the sassiest flavors, the sassiest tips, and a whole lot of sass in general. So put on your apron and get ready to whip up some deliciousness, because mediocre meals just ain't our thing!</div>
+                    <p class="card__apply">
+                        <button onclick="scrollToDiv()"> Explore </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="second" id="section2">
+        <div>
+            <!--<label for="dish-input">Enter the dish you want:</label>
+            <input type="text" id="dish-input">
+            <button id="search-button">Search</button> -->
+            <div class="enter-dish">
+                <p>ENTER DISH NAME</p>
+                <input placeholder="DISH NAME GOES HERE😊" class="subscribe-input" name="email" type="text" id="dish-input">
+                <br>
+                <div class="submit-btn" id="search-button" onclick="scrollToDiv1()">SEARCH</div>
+                <div class="spinneranimation" id="spinneranimation">
+                    <!--<div class="spinner">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div> -->
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="third" id="section3">
+        <!--   <div id="result-container">
+            <h2>Recipe Results</h2>
+            <ul id="recipe-list"></ul>
+            <button id="details-button">Get Recipe Details</button> -->
+        <div class="cookie-card">
+            <span class="title">🍪 Recipe Results</span>
+            <p class="description">
+                <ul id="recipe-list"></ul>
+            </p>
+            <div class="actions">
+                <button class="accept" id="details-button" onclick="scrollToDiv2()">
+                        Accept
+                    </button>
+            </div>
+            <div id="loading-message" class="loading-container">Getting information from the WWW😁......</div>
+        </div>
+    </div>
+    <div class="fourth" id="section4">
+        <div id="cards">
+            <!--<div class="card2">
+            <div class="content2">
+                <p class="heading2">Card Hover Effect
+                </p>
+                <p class="para2">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi laboriosam at voluptas minus culpa deserunt delectus sapiente inventore pariatur
+                </p>
+                <p class="para2">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi laboriosam at voluptas minus culpa deserunt delectus sapiente inventore pariatur
+                </p>
+                <p class="para2">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi laboriosam at voluptas minus culpa deserunt delectus sapiente inventore pariatur
+                </p>
+                <button class="btn2">Read more</button>
+            </div>
+        </div> -->
+        </div>
+
+    </div>
+
+    <script>
+        const videos = [
+            '1.mp4',
+            '2.mp4',
+            '3.mp4',
+            '4.mp4',
+            '5.mp4',
+            '6.mp4'
+            // Add more video URLs as needed
+        ];
+
+        const randomIndex = Math.floor(Math.random() * videos.length);
+
+        const videoElement = document.getElementById('background-video');
+        videoElement.src = "/vid/" + videos[randomIndex];
+
+        function scrollToDiv() {
+            const targetDiv = document.getElementById("section2");
+            const scrollDelay = 0;
+
+            setTimeout(() => {
+                targetDiv.scrollIntoView({
+                    behavior: "smooth"
+                });
+            }, scrollDelay);
+        }
+
+        function scrollToDiv1() {
+            const targetDiv2 = document.getElementById("section3");
+            const scrollDelay = 4000;
+
+            // Add event listener for the scroll event
+            window.addEventListener("scroll", stopAnimation);
+
+            setTimeout(() => {
+                targetDiv2.scrollIntoView({
+                    behavior: "smooth"
+                });
+            }, scrollDelay);
+
+            const spinnerAnimation = `<div class="spinner">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>`;
+            document.getElementById("spinneranimation").innerHTML = spinnerAnimation;
+
+            // Function to stop the animation
+            function stopAnimation() {
+                // Remove the animation
+                document.getElementById("spinneranimation").innerHTML = "";
+                // Remove the scroll event listener
+                window.removeEventListener("scroll", stopAnimation);
+            }
+        }
+
+
+        function scrollToDiv2() {
+            const targetDiv3 = document.getElementById("section4");
+            const scrollDelay = 3000;
+
+            const loadingContainer = document.getElementById("loading-message");
+            loadingContainer.classList.add("show");
+
+            setTimeout(() => {
+                targetDiv3.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+                setTimeout(() => {
+                    loadingContainer.classList.remove("show");
+                }, 300);
+            }, scrollDelay);
+        }
+
+        const searchButton = document.getElementById('search-button');
+        searchButton.addEventListener('click', async function() {
+            const dishInput = document.getElementById('dish-input');
+            const dish = dishInput.value;
+
+            const url = `https://recipe-by-api-ninjas.p.rapidapi.com/v1/recipe?query=${encodeURIComponent(dish)}`;
+            const options = {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': 'aec98ea084msh883e245eb606a53p1e346djsnc1c68e020057',
+                    'X-RapidAPI-Host': 'recipe-by-api-ninjas.p.rapidapi.com'
+                }
+            };
+
+            try {
+                fetch(url, options).then((data) => {
+                    return data.json();
+                }).then((completedata) => {
+                    console.log(completedata);
+                    displayResults(completedata);
+                })
+            } catch (error) {
+                console.error(error);
+            }
+        });
+
+        function displayResults(completedata) {
+            const recipeList = document.getElementById('recipe-list');
+            recipeList.innerHTML = '';
+
+            if (completedata.length === 0) {
+                recipeList.innerHTML = '<li>No recipes found.</li>';
+            } else {
+                completedata.forEach(recipe => {
+                    const radioItem = document.createElement('input');
+                    radioItem.type = 'radio';
+                    radioItem.name = 'recipe';
+                    radioItem.value = recipe.title;
+
+                    const labelItem = document.createElement('label');
+                    labelItem.textContent = recipe.title;
+
+                    const listItem = document.createElement('li');
+                    listItem.appendChild(radioItem);
+                    listItem.appendChild(labelItem);
+
+                    recipeList.appendChild(listItem);
+
+
+                });
+            }
+        }
+
+
+
+        const detailsButton = document.getElementById('details-button');
+        detailsButton.addEventListener('click', function() {
+            const selectedRecipe = document.querySelector('input[name="recipe"]:checked');
+            if (selectedRecipe) {
+                const recipeValue = selectedRecipe.value;
+                recipe_details(recipeValue);
+            } else {
+                console.log('Please select a recipe.');
+            }
+        });
+
+        async function recipe_details(recipeValue) {
+            //console.log(recipeValue);
+            const url = `https://recipe-by-api-ninjas.p.rapidapi.com/v1/recipe?query=${encodeURIComponent(recipeValue)}`;
+            const options = {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': 'aec98ea084msh883e245eb606a53p1e346djsnc1c68e020057',
+                    'X-RapidAPI-Host': 'recipe-by-api-ninjas.p.rapidapi.com'
+                }
+            };
+
+            try {
+                fetch(url, options).then((data) => {
+                    return data.json();
+                }).then((completedata) => {
+                    console.log(completedata);
+                    console.log(completedata[0].ingredients);
+                    console.log(completedata[0].instructions);
+                    let data1 = "";
+                    if (completedata.length === 0) {
+                        console.log("No instructions");
+                        completedata.map((values) => {
+                            data1 = ` <div class="card2">
+                                <div class="content2">
+                                    <p class="heading2">No data available
+                                    </p>
+                                </div>
+                            </div>`
+                        });
+                        document.getElementById("cards").innerHTML = data1;
+                    } else {
+                        completedata.map((values) => {
+                            data1 = ` <div class="card2">
+                                <div class="content2">
+                                    <p class="heading2">${values.title}
+                                    </p>
+                                    <p class="para2">
+                                        <h3>Ingredients</h3>
+                                        ${values.ingredients}
+                                    </p>
+                                    <p class="para2">
+                                        <h3>Instructions</h3>
+                                        ${values.instructions}
+                                    </p>
+                                    <p class="para2">
+                                        Enjoy your  ${values.title}  😊😋
+                                    </p>
+                                </div>
+                            </div>`
+                        });
+                        document.getElementById("cards").innerHTML = data1;
+                    }
+
+
+                })
+
+
+                //for (let {
+                //       title
+                //  }
+                // of result) {
+                //console.log(title);
+                //}
+
+                const displayDetails = document.getElementById('recipe-details');
+                displayDetails.innerHTML = data.title;
+                const displayIngredients = document.getElementById('recipe-ingredients');
+                displayIngredients.innerHTML = data.ingredients;
+                const displayInstructions = document.getElementById('recipe-instructions');
+
+
+                displayIngredients.textContent = output.ingredients ? output.ingredients : 'No ingredients available.';
+                displayInstructions.textContent = output.instructions ? output.instructions : 'No instructions available.';
+
+                // Display the recipe details or perform any further operations
+            } catch (error) {
+                console.error(error);
+            }
+
+        }
+    </script>
+</body>
+
+</html>

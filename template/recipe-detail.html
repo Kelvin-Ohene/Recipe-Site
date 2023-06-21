@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>HEllo world</h1>
+    <div class="third">
+        <div id="result-container">
+            <h2>Recipe Results</h2>
+            <ul id="recipe-list" onclick="displayRecipeDetails(recipe);"></ul>
+            <div id="recipe-details"></div>
+        </div>
+    </div>
+    <script>
+        // Get the recipe ID from the URL query parameters
+        const queryParams = new URLSearchParams(window.location.search);
+        const recipe = queryParams.get('recipe.title');
+        console.log(recipe);
+        // API request to fetch the full recipe details based on the recipe ID
+        const url = `https://recipe-by-api-ninjas.p.rapidapi.com/v1/recipe?query=${encodeURIComponent(recipe)}`;
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': 'aec98ea084msh883e245eb606a53p1e346djsnc1c68e020057',
+                'X-RapidAPI-Host': 'recipe-by-api-ninjas.p.rapidapi.com'
+            }
+        };
+
+        try {
+            const response = fetch(url, options);
+            const result = response.json();
+            console.log(result[0]);
+            //displayResults(result);
+        } catch (error) {
+            console.error(error);
+        }
+    </script>
+</body>
+
+</html>
